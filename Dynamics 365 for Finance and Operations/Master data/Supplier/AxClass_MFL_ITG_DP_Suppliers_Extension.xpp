@@ -1,0 +1,17 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_DP_Suppliers))]
+final class MFL_ITG_DP_Suppliers_Extension
+{
+    public str DPM_VATNum()
+    {
+        VendTable   localVendTable;
+
+        if(!calculatedFieldsMap.exists(funcname()))
+        {
+            localVendTable  =  this.getRecord('VendTable');
+            calculatedFieldsMap.insert(funcName(),localVendTable.VATNum);
+        }
+
+        return calculatedFieldsMap.lookup(funcname());
+    }
+
+}
