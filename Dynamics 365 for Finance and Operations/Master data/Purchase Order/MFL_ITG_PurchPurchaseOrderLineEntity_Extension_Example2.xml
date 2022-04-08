@@ -4,6 +4,7 @@ final public class MFL_ITG_PurchPurchaseOrderLineEntity_Extension
     public void postLoad()
     {
        	next postLoad();
+
 		changecompany(this.DataAreaId)
        	{
 			PurchLine localPurchLine = PurchLine::find(this.PurchaseOrderNumber, this.LineNumber);
