@@ -13,6 +13,6 @@ final public class MFL_ITG_PurchPurchaseOrderHeaderEntity_Extension
             {
 				this.IsActive =   localPurchTable.MyCustomNoYesField;
             }           
-		}
+	}
     }
 }
