@@ -1,0 +1,17 @@
+﻿[ExtensionOf(tableStr(MFL_ITG_VendVendorEntity))]
+final public class MFL_ITG_VendVendorEntity_Extension
+{
+    public void postLoad()
+    {
+        next postLoad();
+
+        changecompany(this.DataAreaId)
+        {
+            VendTable                localVendTable;
+
+            localVendTable = VendTable::find(this.VendorAccountNumber);
+
+            this.IsActive = localVendTable.MyCustomNoYesField;
+        }
+    }
+}
