@@ -1,0 +1,37 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
+final class MFL_ITG_Invoice_Extension
+{
+    private str localPostingProfile;
+    //map custom field to variable
+    protected void initFromInvoiceHeadValues()
+    {
+        localPostingProfile = mFL_ITG_InvoiceHeader.customFieldText5;
+        next initFromInvoiceHeadValues();
+    }
+
+    //add additional validation of new field
+    private void additionalValidation()
+    {
+        if(localPostingProfile && !VendLedger::checkExist(localPostingProfile))
+        {
+            this.addError(strFmt("Additional validation, posting profile %1 doesn't exist",localPostingProfile));
+        }
+    }
+
+    //call additional validation
+    protected void validateHead()
+    {
+        next validateHead();
+        this.additionalValidation();
+    }
+
+    //update vendor transaction
+    protected void createLedgerJournalTransVend()
+    {
+        next createLedgerJournalTransVend();
+        ledgerJournalVendTrans.selectForUpdate(true);
+        ledgerJournalVendTrans.PostingProfile = localPostingProfile;
+        ledgerJournalVendTrans.update();
+    }
+
+}

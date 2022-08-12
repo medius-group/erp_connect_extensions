@@ -1,0 +1,14 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_InvoicePurchaseApproval))]
+final class MFL_ITG_InvoicePurchaseApproval_Extension
+{
+    protected void updateLine()
+    {
+        next updateLine();
+
+        VendInvoiceInfoLine localVendInvoiceInfoLine = this.refLine;
+
+        localVendInvoiceInfoLine.selectForUpdate(true);
+        localVendInvoiceInfoLine.MyCustomDateTimeField = mFL_ITG_InvoicePOConnectionLine.customFieldDateTime1;
+        localVendInvoiceInfoLine.update();
+    }
+}
