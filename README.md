@@ -8,7 +8,7 @@ To read more about the extension concept it's possible to get more information o
 [Read more here](Business%20Central/README.md)
 
 ## Dynamics 365 for Finance and Operations
-[Read more here](Dynamics%20365%20Business%20Central/README.md)
+[Read more here](Dynamics%20365%20for%20Finance%20and%20Operations/README.md)
 
 ## Dynamics Ax 2012
 [Read more here](Dynamics%20Ax2012/README.md)
