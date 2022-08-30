@@ -1,0 +1,13 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_DP_Suppliers))]
+final class MFL_ITG_DP_Suppliers_Extension
+{
+	private QueryBuildDataSource queryBuildDataSource;
+	protected void initQuery()
+	{
+		next initQuery();
+		//get the correct data source
+		queryBuildDataSource = query.dataSourceName('VendTable');
+		//add a range on the VendGroup field
+		queryBuildDataSource.addRange(fieldNum(VendTable,VendGroup)).value(queryValue('40'));
+	}
+}
