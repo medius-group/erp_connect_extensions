@@ -5,7 +5,7 @@ final class MFL_ITG_Invoice_Extension
     //map custom field to variable
     protected void initFromInvoiceHeadValues()
     {
-        localPostingProfile = mFL_ITG_InvoiceHeader.customFieldText5;
+        localPostingProfile = mFL_ITG_InvoiceHeader.customFieldList1;
         next initFromInvoiceHeadValues();
     }
 
@@ -14,7 +14,7 @@ final class MFL_ITG_Invoice_Extension
     {
         if(localPostingProfile && !VendLedger::checkExist(localPostingProfile))
         {
-            this.addError(strFmt("Additional validation, posting profile %1 doesn't exist",localPostingProfile));
+            this.addError(strFmt("Additional validation, posting profile %1 doesn't exist.",localPostingProfile));
         }
     }
 

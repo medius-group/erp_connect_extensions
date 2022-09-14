@@ -1,0 +1,17 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_DP_Orders))]
+final class MFL_ITG_DP_Orders_Extension
+{
+    private QueryBuildDataSource queryBuildDataSource;
+    protected void initQuery()
+    {
+        next initQuery();
+        //get the correct data source
+        queryBuildDataSource = query.dataSourceName('PurchTable');
+ 
+        //add a range on the VendGroup field
+        queryBuildDataSource.addRange(fieldNum(PurchTable,VENDGROUP)).value(strFmt('((%1 != "%2"))',
+            fieldStr(PurchTable, VENDGROUP),
+            queryValue("GroupValue")));
+    }
+
+}
