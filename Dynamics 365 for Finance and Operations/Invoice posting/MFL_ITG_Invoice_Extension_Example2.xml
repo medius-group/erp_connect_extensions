@@ -1,0 +1,38 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
+final class MFL_ITG_Invoice_Extension
+{
+    protected void runITMService()
+    {
+        LedgerJournalTrans localLedgerJournalTrans;
+
+        next runITMService();
+
+        select count(RecId) from localLedgerJournalTrans
+            where localLedgerJournalTrans.JournalNum == ledgerJournalTable.JournalNum
+            && localLedgerJournalTrans.AccountType != LedgerJournalACType::Vend;
+
+        if (localLedgerJournalTrans.RecId > 1)
+        {
+            while select forupdate localLedgerJournalTrans
+                where localLedgerJournalTrans.JournalNum == ledgerJournalTable.JournalNum
+                && localLedgerJournalTrans.AccountType != LedgerJournalACType::Vend
+            {
+                localLedgerJournalTrans.LedgerDimension =  MFL_ITG_LedgerDimensionRelations::mergeLedgerDimensionWithDimensionXml2(localLedgerJournalTrans.LedgerDimension, dimensionsXmlLine);
+                localLedgerJournalTrans.update();
+            }
+        }
+        // No localLedgerJournalTrans found means we should update the vendor line
+        else
+        {
+            select forupdate localLedgerJournalTrans
+                where localLedgerJournalTrans.JournalNum == ledgerJournalTable.JournalNum
+                && localLedgerJournalTrans.AccountType == LedgerJournalACType::Vend;
+            
+            if(localLedgerJournalTrans)
+            {
+                localLedgerJournalTrans.OffsetLedgerDimension = MFL_ITG_LedgerDimensionRelations::mergeLedgerDimensionWithDimensionXml2(localLedgerJournalTrans.OffsetLedgerDimension, dimensionsXmlLine);
+                localLedgerJournalTrans.update();
+            }
+        }
+    }
+}
