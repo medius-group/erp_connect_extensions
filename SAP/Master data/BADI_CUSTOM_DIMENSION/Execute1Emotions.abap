@@ -5,7 +5,8 @@ METHOD /medius/if_badi_custom_dimensi~execute1.
     lv_index             TYPE string,
     lv_records_to_return TYPE i,
     lv_string            TYPE string,
-    lt_strings           TYPE TABLE OF string.
+    lt_strings           TYPE TABLE OF string,
+    lv_count             TYPE i.
 
   IF ic_id EQ 'Hangry'.
     ls_dimension-is_active = abap_true.
@@ -231,4 +232,10 @@ METHOD /medius/if_badi_custom_dimensi~execute1.
       APPEND ls_dimension TO es_dimensions-dimensions.
     ENDLOOP.
   ENDLOOP.
+
+  DESCRIBE TABLE es_dimensions-dimensions LINES lv_count.
+
+  IF lv_count GE ii_number_of_records.
+    eb_has_more = abap_true.
+  ENDIF.
 ENDMETHOD.
