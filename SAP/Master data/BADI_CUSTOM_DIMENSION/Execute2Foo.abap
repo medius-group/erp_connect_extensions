@@ -4,17 +4,14 @@ METHOD /medius/if_badi_custom_dimensi~execute2.
     lv_comp_code         TYPE bukrs,
     lv_index             TYPE string,
     lv_records_to_return TYPE i,
-    lv_value             TYPE string.
+    lv_value             TYPE string,
+    lv_count             TYPE i.
 
-  " This contrived example returns generated bogus records.
-  " Here, available features are demonstrated but don't make much sense in the real world.
-  " Other Medius master data processes retrieving dimension values can be used for reference. E.g GL_ACCOUNT, COST_CENTER, WBS_ELEMENTS, etc.
-
-  " Pagination is required to be implemented.
-  " This is a contrived example. In real life, it will reflect the data. SQL queries must include OFFSET and NUMBER_OF_RECORDS parameters.
-  IF ii_offset EQ 0. " When asking for first page, return a full page. If a full page is returned, HAS_MORE is set to true and the next page will be asked for.
+  " Pagination - this example simply returns one and a half page.
+  " These parameters should be passed to the paging mechanism of SQL. (UP TO x ROWS and OFFSET)
+  IF ii_offset EQ 0. " For first page, return a full page.
     lv_records_to_return = ii_number_of_records.
-  ELSEIF ii_offset EQ ii_number_of_records. " When asking for subsequent pages, return half a page.
+  ELSEIF ii_offset EQ ii_number_of_records. " Otherwise, return half a page.
     lv_records_to_return = ii_number_of_records / 2.
   ENDIF.
 
@@ -54,4 +51,10 @@ METHOD /medius/if_badi_custom_dimensi~execute2.
       APPEND ls_dimension TO es_dimensions-dimensions. " Add the record to be exported.
     ENDLOOP.
   ENDDO.
+
+  DESCRIBE TABLE es_dimensions-dimensions LINES lv_count.
+
+  IF lv_count GE ii_number_of_records. " If a full page is retrieved, inform client that there might be more records.
+    eb_has_more = abap_true.
+  ENDIF.
 ENDMETHOD.
