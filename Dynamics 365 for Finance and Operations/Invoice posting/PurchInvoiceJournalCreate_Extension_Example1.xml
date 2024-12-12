@@ -1,0 +1,16 @@
+﻿[ExtensionOf(ClassStr(PurchInvoiceJournalCreate))]
+final class PurchInvoiceJournalCreate_Class_Extension
+{
+    protected boolean mustVendorInvoiceUseReviewProcess()
+    {
+        boolean ret = next mustVendorInvoiceUseReviewProcess();
+ 
+        // Write your condition here; maybe a specific user, based on Purch Pool perhaps, etc.
+        if (curUserId() == 'someUser')
+        {
+            ret = true;
+        }
+ 
+        return ret;
+    }
+}
