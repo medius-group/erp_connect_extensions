@@ -4,15 +4,15 @@ final public class MFL_ITG_PurchPurchaseOrderHeaderEntity_Extension
     public void postLoad()
     {
         next postLoad(); 
-               
-	changecompany(this.DataAreaId)
-        {  
-	    PurchTable localPurchTable = PurchTable::find(this.PurchaseOrderNumber);    
+
+	      changecompany(this.DataAreaId)
+        {
+	          PurchTable localPurchTable = PurchTable::find(this.PurchaseOrderNumber);    
 
             if(localPurchTable)
             {
-		this.IsActive =   localPurchTable.MyCustomNoYesField;
-            }           
-	}
-    }
+		            this.IsActive =   localPurchTable.MyCustomNoYesField;
+            }
+        }
+    }  
 }
