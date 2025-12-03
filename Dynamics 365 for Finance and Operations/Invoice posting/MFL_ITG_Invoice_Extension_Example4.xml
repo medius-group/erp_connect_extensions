@@ -1,12 +1,15 @@
 ﻿[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
 final class MFL_ITG_Invoice_Extension
 {
+    /// <summary>
+    /// Take coding line custom text 5 from Medius APA and map it to ledgerJournalTrans.Txt
+    /// </summary>
     protected void createLedgerJournalTrans(ledgerJournalTrans _ledgerJournalTransPrevious)
     {
         next createLedgerJournalTrans(_ledgerJournalTransPrevious);
 
         ledgerJournalTrans.selectForUpdate(true);
         ledgerJournalTrans.Txt = mFL_ITG_InvoiceCodingLine.customFieldText5;
-        ledgerJournalVendTrans.update();
+        ledgerJournalTrans.update();
     }
 }

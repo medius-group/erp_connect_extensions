@@ -1,0 +1,21 @@
+﻿[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
+final class MFL_ITG_Invoice_Extension
+{
+    private XmlDocument                         localXmlDocument;
+    private XmlNode                             localXmlNode;
+
+    /// <summary>
+    /// Take dimension 7 from Medius APA and map it to ledgerJournalTrans.Txt
+    /// </summary>
+    protected void createLedgerJournalTrans(ledgerJournalTrans _ledgerJournalTransPrevious)
+    {
+        next createLedgerJournalTrans(_ledgerJournalTransPrevious);
+
+        localXmlDocument    = XmlDocument::newXml(dimensionsXmlLine);
+        localXmlNode        = localXmlDocument.selectSingleNode('//Dimension[Number=7]');
+
+        ledgerJournalTrans.selectForUpdate(true);
+        ledgerJournalTrans.Txt = localXmlNode.selectSingleNode('Value').text();
+        ledgerJournalTrans.update();
+    }
+}

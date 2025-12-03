@@ -1,21 +1,21 @@
 ﻿[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
 final class MFL_ITG_Invoice_Extension
 {
-  private smmActivities projectActivity;
+    private smmActivities projectActivity;
   
-  protected void createLedgerJournalTrans(ledgerJournalTrans _ledgerJournalTransPrevious)
-  {
-    next createLedgerJournalTrans(_ledgerJournalTransPrevious);
-
-    ledgerJournalTrans.selectForUpdate(true);
-
-    projectActivity                                 = smmActivities::find(projActivityId);
-
-    if(projectActivity)
+    protected void createLedgerJournalTrans(ledgerJournalTrans _ledgerJournalTransPrevious)
     {
-      ledgerJournalTrans.MyCustomActivityField    = projectActivity.ActivityNumber;
-    }
+        next createLedgerJournalTrans(_ledgerJournalTransPrevious);
 
-    ledgerJournalTrans.update();
-  }
+        ledgerJournalTrans.selectForUpdate(true);
+
+        projectActivity = smmActivities::find(projActivityId);
+
+        if(projectActivity)
+        {
+            ledgerJournalTrans.MyCustomActivityField = projectActivity.ActivityNumber;
+        }
+
+        ledgerJournalTrans.update();
+    }
 }
