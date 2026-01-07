@@ -9,7 +9,7 @@ final class MFL_ITG_InvoicePurchaseApproval_Extension
         next createTable();
 
         refTable.selectForUpdate(true);
-        refTable.MyCustmField = mFL_ITG_InvoiceHeader.customFieldText5;
+        refTable.MyCustomField = mFL_ITG_InvoiceHeader.customFieldText5;
         refTable.update();
     }
 }
