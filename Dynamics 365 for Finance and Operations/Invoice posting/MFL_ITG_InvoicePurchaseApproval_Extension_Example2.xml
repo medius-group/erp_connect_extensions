@@ -1,0 +1,15 @@
+﻿/// <summary>
+/// map mFL_ITG_InvoiceHeader.customFieldText5 to a custom field on VendInvoiceInfoTable (refTable)
+/// </summary>
+[ExtensionOf(ClassStr(MFL_ITG_InvoicePurchaseApproval))]
+final class MFL_ITG_InvoicePurchaseApproval_Extension
+{
+    protected void createTable()
+    {
+        next createTable();
+
+        refTable.selectForUpdate(true);
+        refTable.MyCustmField = mFL_ITG_InvoiceHeader.customFieldText5;
+        refTable.update();
+    }
+}

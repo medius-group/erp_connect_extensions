@@ -1,4 +1,7 @@
-﻿[ExtensionOf(ClassStr(MFL_ITG_InvoicePurchaseApproval))]
+﻿/// <summary>
+/// map mFL_ITG_InvoicePOConnectionLine.customFieldDateTime1 to a custom field on VendInvoiceInfoLine
+/// </summary>
+[ExtensionOf(ClassStr(MFL_ITG_InvoicePurchaseApproval))]
 final class MFL_ITG_InvoicePurchaseApproval_Extension
 {
     protected void updateLine()
