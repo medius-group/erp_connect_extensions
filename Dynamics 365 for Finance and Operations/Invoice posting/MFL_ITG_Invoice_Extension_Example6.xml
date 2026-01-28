@@ -1,0 +1,16 @@
+﻿/// <summary>
+/// map mFL_ITG_InvoiceHeader.customFieldNumeric5 to a custom field on the ledgerjournaltrans vendor transaction
+/// </summary>
+[ExtensionOf(ClassStr(MFL_ITG_Invoice))]
+final class MFL_ITG_Invoice_Extension
+{   
+    protected void createLedgerJournalTransVend()
+    {
+        next createLedgerJournalTransVend();
+
+        ledgerJournalVendTrans.selectForUpdate(true);
+        ledgerJournalVendTrans.MyCustomField = mFL_ITG_InvoiceHeader.customFieldNumeric5;
+        ledgerJournalVendTrans.update();
+    }
+
+}
