@@ -12,5 +12,4 @@ final class MFL_ITG_Invoice_Extension
         ledgerJournalVendTrans.MyCustomField = mFL_ITG_InvoiceHeader.customFieldNumeric5;
         ledgerJournalVendTrans.update();
     }
-
 }
