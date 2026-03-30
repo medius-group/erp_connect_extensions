@@ -1,15 +1,19 @@
-﻿/// <summary>
-/// map mFL_ITG_InvoiceHeader.customFieldNumeric5 to a custom field on the ledgerjournaltrans vendor transaction
+﻿﻿/// <summary>
+/// map mFL_ITG_InvoiceHeader custom fields to a custom field on the ledgerjournaltrans vendor transaction, Medius APA has 5 custom fields of each type.
 /// </summary>
 [ExtensionOf(ClassStr(MFL_ITG_Invoice))]
 final class MFL_ITG_Invoice_Extension
-{   
+{
     protected void createLedgerJournalTransVend()
     {
         next createLedgerJournalTransVend();
 
         ledgerJournalVendTrans.selectForUpdate(true);
-        ledgerJournalVendTrans.MyCustomField = mFL_ITG_InvoiceHeader.customFieldNumeric5;
+        ledgerJournalVendTrans.MyNumericCustomField     = mFL_ITG_InvoiceHeader.customFieldNumeric1;
+        ledgerJournalVendTrans.MyBooleanCustomField     = mFL_ITG_InvoiceHeader.customFieldBoolean1;
+        ledgerJournalVendTrans.MyStrCustomField         = mFL_ITG_InvoiceHeader.customFieldText1;
+        ledgerJournalVendTrans.MyOtherStrCustomField    = mFL_ITG_InvoiceHeader.customFieldList1;
+        ledgerJournalVendTrans.MyDateCustomField        = mFL_ITG_InvoiceHeader.customFieldDateTime1;
         ledgerJournalVendTrans.update();
     }
 }
