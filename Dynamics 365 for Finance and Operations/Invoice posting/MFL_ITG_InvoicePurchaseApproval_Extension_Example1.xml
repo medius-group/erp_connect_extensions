@@ -1,5 +1,5 @@
-﻿/// <summary>
-/// map mFL_ITG_InvoicePOConnectionLine.customFieldDateTime1 to a custom field on VendInvoiceInfoLine
+﻿﻿/// <summary>
+/// map mFL_ITG_InvoicePOConnectionLine custom fields to custom fields on VendInvoiceInfoLine, Medius APA has 5 custom fields of each type.
 /// </summary>
 [ExtensionOf(ClassStr(MFL_ITG_InvoicePurchaseApproval))]
 final class MFL_ITG_InvoicePurchaseApproval_Extension
@@ -11,7 +11,10 @@ final class MFL_ITG_InvoicePurchaseApproval_Extension
         VendInvoiceInfoLine localVendInvoiceInfoLine = this.refLine;
 
         localVendInvoiceInfoLine.selectForUpdate(true);
-        localVendInvoiceInfoLine.MyCustomDateTimeField = mFL_ITG_InvoicePOConnectionLine.customFieldDateTime1;
+        localVendInvoiceInfoLine.MyNumericCustomField     = mFL_ITG_InvoicePOConnectionLine.customFieldNumeric1;
+        localVendInvoiceInfoLine.MyBooleanCustomField     = mFL_ITG_InvoicePOConnectionLine.customFieldBoolean1;
+        localVendInvoiceInfoLine.MyStrCustomField         = mFL_ITG_InvoicePOConnectionLine.customFieldText1;
+        localVendInvoiceInfoLine.MyCustomDateTimeField    = mFL_ITG_InvoicePOConnectionLine.customFieldDateTime1;
         localVendInvoiceInfoLine.update();
     }
 }
